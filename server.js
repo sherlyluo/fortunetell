@@ -2,6 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const path = require('path');
 const winston = require('winston');
+const ejs = require('ejs');
 require('dotenv').config();
 
 // Configure logger
@@ -22,6 +23,8 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 // Middleware: Log all requests
 app.use((req, res, next) => {
@@ -37,6 +40,11 @@ app.use((req, res, next) => {
 
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Render the main page
+app.get('/', (req, res) => {
+    res.render('index');
+});
 
 app.post('/api/tarot', async (req, res) => {
     try {
@@ -96,9 +104,8 @@ app.post('/api/tarot/details', async (req, res) => {
             }
         });
 
-        
         const detailedInterpretation = gptResponse.data.choices[0].message.content;
-	console.log(detailedInterpretation);
+        console.log(detailedInterpretation);
 
         logger.info(`Generated detailed interpretation for ${cardName}`);
 

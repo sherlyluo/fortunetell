@@ -307,3 +307,23 @@
 {"level":"info","message":"Incoming request: GET /images/fool.jpg","timestamp":"2024-09-08T11:45:25.776Z"}
 {"level":"info","message":"Incoming request: POST /api/tarot/details","timestamp":"2024-09-08T11:45:27.598Z"}
 {"level":"info","message":"Generated detailed interpretation for 愚者","timestamp":"2024-09-08T11:45:31.917Z"}
+{"level":"info","message":"Server is running on http://localhost:3000","timestamp":"2024-09-09T03:56:35.076Z"}
+{"level":"info","message":"Incoming request: GET /","timestamp":"2024-09-09T03:56:40.488Z"}
+{"level":"info","message":"Incoming request: GET /","timestamp":"2024-09-09T03:56:40.713Z"}
+{"level":"info","message":"Server is running on http://localhost:3000","timestamp":"2024-09-09T04:01:22.009Z"}
+{"level":"info","message":"Incoming request: GET /","timestamp":"2024-09-09T04:01:26.797Z"}
+{"level":"info","message":"Incoming request: GET /","timestamp":"2024-09-09T04:01:27.059Z"}
+{"level":"info","message":"Server is running on http://localhost:3000","timestamp":"2024-09-09T04:04:01.116Z"}
+{"level":"info","message":"Incoming request: GET /","timestamp":"2024-09-09T04:04:05.645Z"}
+{"level":"info","message":"Incoming request: GET /styles.css","timestamp":"2024-09-09T04:04:05.660Z"}
+{"level":"info","message":"Incoming request: GET /script.js","timestamp":"2024-09-09T04:04:05.661Z"}
+{"level":"info","message":"Server is running on http://localhost:3000","timestamp":"2024-09-09T04:06:23.542Z"}
+{"level":"info","message":"Incoming request: GET /","timestamp":"2024-09-09T04:06:27.272Z"}
+{"level":"info","message":"Incoming request: GET /styles.css","timestamp":"2024-09-09T04:06:27.287Z"}
+{"level":"info","message":"Incoming request: GET /script.js","timestamp":"2024-09-09T04:06:27.288Z"}
+{"level":"info","message":"Incoming request: POST /api/tarot","timestamp":"2024-09-09T04:06:31.718Z"}
+{"level":"info","message":"Selected card: 魔术师","timestamp":"2024-09-09T04:06:31.719Z"}
+{"level":"info","message":"Generated interpretation for 魔术师","timestamp":"2024-09-09T04:06:34.080Z"}
+{"level":"info","message":"Incoming request: GET /images/magician.jpg","timestamp":"2024-09-09T04:06:34.084Z"}
+{"level":"info","message":"Incoming request: POST /api/tarot/details","timestamp":"2024-09-09T04:06:35.197Z"}
+{"level":"info","message":"Generated detailed interpretation for 魔术师","timestamp":"2024-09-09T04:06:40.988Z"}
