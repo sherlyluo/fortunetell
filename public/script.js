@@ -9,8 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeModal = document.getElementsByClassName('close')[0];
     const detailedInterpretationP = document.getElementById('detailedInterpretation');
     const loadingSpinner = document.getElementById('loadingSpinner');
-
-    const API_URL = 'https://tarot-api-worker.xiuxiu-luo.workers.dev'; // 替换为您的 Cloudflare Worker URL
+    const API_URL = 'https://tarot-api-worker.xiuxiu-luo.workers.dev';
 
     drawCardButton.addEventListener('click', async () => {
         const userQuestion = userQuestionInput.value.trim();
@@ -25,18 +24,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 body: JSON.stringify({ question: userQuestion }),
             });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
             const data = await response.json();
+
+            if (!data.cardName || !data.cardImage || !data.interpretation) {
+                throw new Error('Incomplete data received from server');
+            }
 
             tarotCardsDiv.innerHTML = `<img src="${data.cardImage}" alt="${data.cardName}" />`;
             cardNameP.textContent = `抽到的塔罗牌：${data.cardName}`;
             interpretationP.textContent = data.interpretation;
-
             moreDetailsButton.style.display = 'inline-block';
-
             document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
         } catch (error) {
             console.error('Error:', error);
-            interpretationP.textContent = '抱歉，出现了错误，请稍后再试。';
+            interpretationP.textContent = `抱歉，出现了错误：${error.message}`;
         } finally {
             drawCardButton.disabled = false;
             drawCardButton.textContent = '抽取塔罗牌';
@@ -46,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
     moreDetailsButton.addEventListener('click', async () => {
         const userQuestion = userQuestionInput.value.trim();
         const cardName = cardNameP.textContent.split('：')[1];
-
         try {
             loadingSpinner.style.display = 'block';
             detailedInterpretationP.innerHTML = '';
@@ -59,7 +64,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 body: JSON.stringify({ question: userQuestion, cardName: cardName }),
             });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
             const data = await response.json();
+
+            if (!data.detailedInterpretation) {
+                throw new Error('Incomplete data received from server');
+            }
 
             loadingSpinner.style.display = 'none';
             detailedInterpretationP.innerHTML = `
@@ -69,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Error:', error);
             loadingSpinner.style.display = 'none';
-            detailedInterpretationP.textContent = '抱歉，获取详细解析时出现错误，请稍后再试。';
+            detailedInterpretationP.textContent = `抱歉，获取详细解析时出现错误：${error.message}`;
         }
     });
 
