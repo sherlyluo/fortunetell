@@ -1,0 +1,9 @@
+ame = "tarot-api-worker"
+main = "worker.js"
+compatibility_date = "2023-09-09"
+
+[
+vars
+]
+# Do not put your actual API key here, set it in the Cloudflare dashboard
+OPENAI_API_KEY = "your-api-key-here"
