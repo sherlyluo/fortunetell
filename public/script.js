@@ -10,13 +10,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const detailedInterpretationP = document.getElementById('detailedInterpretation');
     const loadingSpinner = document.getElementById('loadingSpinner');
 
+    const API_URL = 'https://tarot-api-worker.xiuxiu-luo.workers.dev'; // 替换为您的 Cloudflare Worker URL
+
     drawCardButton.addEventListener('click', async () => {
         const userQuestion = userQuestionInput.value.trim();
         drawCardButton.disabled = true;
         drawCardButton.textContent = '正在抽取...';
         
         try {
-            const response = await fetch('/api/tarot', { 
+            const response = await fetch(`${API_URL}/api/tarot`, { 
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -29,10 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
             cardNameP.textContent = `抽到的塔罗牌：${data.cardName}`;
             interpretationP.textContent = data.interpretation;
 
-            // Show the "查看更多" button
             moreDetailsButton.style.display = 'inline-block';
 
-            // Scroll to the result
             document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
         } catch (error) {
             console.error('Error:', error);
@@ -48,12 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const cardName = cardNameP.textContent.split('：')[1];
 
         try {
-            // Show loading spinner and hide previous interpretation
             loadingSpinner.style.display = 'block';
             detailedInterpretationP.innerHTML = '';
             modal.style.display = 'block';
 
-            const response = await fetch('/api/tarot/details', {
+            const response = await fetch(`${API_URL}/api/tarot/details`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -62,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             const data = await response.json();
 
-            // Hide loading spinner and show interpretation
             loadingSpinner.style.display = 'none';
             detailedInterpretationP.innerHTML = `
                 <strong>您的问题：</strong> ${userQuestion ? userQuestion : '(未提供)'}<br><br>
